@@ -54,7 +54,12 @@ fun PantallaAvisos(vm: AvisosViewModel) {
         if (Notificador.tienePermiso(contexto)) vm.permisoRespondido(true)
     }
 
-    // TODO Paso 3: recolectar vm.eventos y llamar a Notificador.mostrar(contexto, aviso)
+    LaunchedEffect(Unit) {
+        vm.eventos.collect { aviso ->
+            val mostrado = Notificador.mostrar(contexto, aviso)
+            // TODO Paso 8: si no se mostró, avisar al ViewModel
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -88,7 +93,10 @@ fun PantallaAvisos(vm: AvisosViewModel) {
                 }
             }
             TarjetaSeccion("Avisos") {
-                // TODO Paso 3
+                Text("Muestra una notificación al instante.")
+                Button(onClick = { vm.avisarAhora() }) {
+                    Text("Mostrar aviso")
+                }
             }
             TarjetaSeccion("Recordatorio") {
                 // TODO Paso 5
