@@ -7,3 +7,5 @@
 3. Quiero que el historial de avisos no se pierda al cerrar la app. Implementa la persistencia con Room: una entidad AvisoEntity, un AvisoDao con un Flow ordenado del más reciente al más antiguo y la base de datos AvisosDatabase. Crea AvisosRepositoryRoom que implemente la interface AvisosRepository sin recibir Context, solo el DAO.
 
 4. ¿Cómo creo la base de datos de Room en la clase Application y le paso el repositorio al AvisosViewModelFactory sin romper MVVM? En el ViewModel convierte el Flow del repositorio en StateFlow con stateIn.
+
+5. Rediseña la interfaz de PantallaAvisos y HistorialAvisos para que se vea moderna y atractiva: un encabezado con degradado y contadores (avisos, permiso y receptor), tarjetas redondeadas con un icono y color propio para cada sección, un anillo circular animado para la cuenta regresiva del recordatorio, un banner de error con icono cuando el permiso está denegado y un historial con iconos de colores según el origen. Mantén la misma lógica y no cambies el ViewModel.
