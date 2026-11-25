@@ -12,7 +12,10 @@ data class Aviso(
     val texto: String,
     val origen: Origen,
     val hora: String
-)
+) {
+    // El recordatorio es urgente: usa el canal de importancia alta.
+    val urgente: Boolean get() = origen == Origen.RECORDATORIO
+}
 
 sealed interface PermisoUi {
     data object SinPedir : PermisoUi
