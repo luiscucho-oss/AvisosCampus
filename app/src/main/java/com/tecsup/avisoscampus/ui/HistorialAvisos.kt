@@ -1,3 +1,70 @@
 package com.tecsup.avisoscampus.ui
 
-// [A] Paso 7: crea aquí el Composable HistorialAvisos(avisos: List<Aviso>)
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import com.tecsup.avisoscampus.model.Aviso
+
+/**
+ * Tarjeta Historial. Solo recibe la lista: no conoce al ViewModel.
+ * Usa Column + forEach porque la pantalla ya tiene desplazamiento.
+ */
+@Composable
+fun HistorialAvisos(avisos: List<Aviso>) {
+    TarjetaSeccion("Historial") {
+        if (avisos.isEmpty()) {
+            Text("Sin avisos todavía", color = MaterialTheme.colorScheme.onSurfaceVariant)
+        } else {
+            avisos.take(20).forEachIndexed { i, aviso ->
+                if (i > 0) HorizontalDivider()
+                FilaAviso(aviso)
+            }
+        }
+    }
+}
+
+@Composable
+private fun FilaAviso(aviso: Aviso) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(vertical = 6.dp),
+        verticalArrangement = Arrangement.spacedBy(2.dp)
+    ) {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            Text(
+                aviso.origen.texto,
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSecondaryContainer,
+                modifier = Modifier
+                    .background(
+                        MaterialTheme.colorScheme.secondaryContainer,
+                        RoundedCornerShape(50)
+                    )
+                    .padding(horizontal = 10.dp, vertical = 2.dp)
+            )
+            Text(
+                aviso.hora,
+                style = MaterialTheme.typography.labelMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                modifier = Modifier
+                    .weight(1f)
+                    .padding(start = 8.dp)
+            )
+        }
+        Text(aviso.titulo, fontWeight = FontWeight.Bold)
+        Text(aviso.texto, style = MaterialTheme.typography.bodyMedium)
+    }
+}
