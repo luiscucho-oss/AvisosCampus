@@ -72,6 +72,7 @@ object Notificador {
             .setSmallIcon(R.drawable.ic_notificacion)
             .setContentTitle(aviso.titulo)
             .setContentText(aviso.texto)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(textoLargo(aviso)))
             .setPriority(prioridad)
             .setContentIntent(pendiente)
             .setAutoCancel(true)
@@ -80,4 +81,9 @@ object Notificador {
         NotificationManagerCompat.from(context).notify(aviso.id, notificacion)
         return true
     }
+
+    // Texto completo que se ve al expandir la notificación.
+    private fun textoLargo(aviso: Aviso): String =
+        "${aviso.texto}.\nOrigen: ${aviso.origen.texto} · Hora: ${aviso.hora}\n" +
+            "Toca para abrir AvisosCampus y ver el historial completo."
 }
