@@ -14,10 +14,14 @@ private val DarkColorScheme = darkColorScheme(
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = Azul40,
+    primary = Indigo,
     onPrimary = Color.White,
-    secondary = AzulGris40,
-    tertiary = Celeste40
+    secondary = Violeta,
+    tertiary = Fucsia,
+    background = FondoClaro,
+    surface = Color.White,
+    onSurface = TextoFuerte,
+    onSurfaceVariant = TextoSuave
 )
 
 @Composable
